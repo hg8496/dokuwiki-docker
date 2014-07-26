@@ -16,6 +16,7 @@ RUN rm /var/www/html/index.html
 ADD apache-site.conf /etc/apache2/sites-enabled/000-default.conf
 RUN a2enmod rewrite
 ADD keys.pub /tmp/your_key.pub
+ADD htaccess /var/www/html/.htaccess
 RUN cat /tmp/your_key.pub >> /root/.ssh/authorized_keys && rm -f /tmp/your_key.pub
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
