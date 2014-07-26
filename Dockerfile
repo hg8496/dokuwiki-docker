@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install wget -y && apt-get clean
 
 RUN wget http://download.dokuwiki.org/src/dokuwiki/dokuwiki-stable.tgz && tar xf dokuwiki-stable.tgz -C /var/www/html/ --strip-components=1 && rm dokuwiki-stable.tgz
 RUN chown -R www-data:www-data /var/www/html
+RUN rm /var/www/html/index.html
 ADD apache-site.conf /etc/apache2/sites-enabled/000-default.conf
 RUN a2enmod rewrite
 ADD keys.pub /tmp/your_key.pub
