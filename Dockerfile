@@ -8,7 +8,12 @@ ENV HOME /root
 # init system will auto-generate one during boot.
 RUN /etc/my_init.d/00_regen_ssh_host_keys.sh
 
-RUN apt-get update && apt-get install wget -y && apt-get clean && wget http://download.dokuwiki.org/src/dokuwiki/dokuwiki-stable.tgz && tar xf dokuwiki-stable.tgz -C /var/www/html/ --strip-components=1 && rm dokuwiki-stable.tgz && chown -R www-data:www-data /var/www/html && rm /var/www/html/index.html && mkdir -p /opt/dokuwiki && mv /var/www/html/data /opt/dokuwiki && ln -s /opt/dokuwiki/data /var/www/html/data && mv /var/www/html/conf/local.php /opt/dokuwiki && ln -s /opt/dokuwiki/local.php /var/www/html/conf/local.php
+RUN apt-get update && apt-get install wget -y && apt-get clean && wget http://download.dokuwiki.org/src/dokuwiki/dokuwiki-stable.tgz && tar xf dokuwiki-stable.tgz -C /var/www/html/ --strip-components=1 && rm dokuwiki-stable.tgz && chown -R www-data:www-data /var/www/html && rm /var/www/html/index.html 
+RUN mkdir -p /opt/dokuwiki 
+RUN mv /var/www/html/data /opt/dokuwiki 
+RUN ln -s /opt/dokuwiki/data /var/www/html/data
+RUN mv /var/www/html/conf/local.php /opt/dokuwiki
+RUN ln -s /opt/dokuwiki/local.php /var/www/html/conf/local.php
 ADD apache-site.conf /etc/apache2/sites-enabled/000-default.conf
 RUN a2enmod rewrite
 ADD keys.pub /tmp/your_key.pub
