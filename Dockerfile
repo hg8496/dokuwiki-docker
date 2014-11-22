@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install wget -y && apt-get clean && wget http://do
 RUN mkdir -p /opt/dokuwiki 
 RUN mv /var/www/html/data /opt/dokuwiki 
 RUN ln -s /opt/dokuwiki/data /var/www/html/data
-RUN mv /var/www/html/conf/local.php /opt/dokuwiki
+RUN mv /var/www/html/conf/local.php.dist /opt/dokuwiki
 RUN ln -s /opt/dokuwiki/local.php /var/www/html/conf/local.php
 ADD apache-site.conf /etc/apache2/sites-enabled/000-default.conf
 RUN a2enmod rewrite
