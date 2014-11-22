@@ -21,13 +21,10 @@ RUN apt-get update \
     && mv /var/www/html/conf /opt/dokuwiki/ && ln -s /opt/dokuwiki/conf /var/www/html/conf \
     && mv /var/www/html/lib/tpl /opt/dokuwiki && ln -s /opt/dokuwiki/tpl /var/www/html/lib/tpl \
     && mv /var/www/html/lib/plugins /opt/dokuwiki && ln -s /opt/dokuwiki/plugins /var/www/html/lib/plugins \
-    && chown -R www-data:www-data /var/www/html /opt/dokuwiki
-ADD apache-site.conf /etc/apache2/sites-enabled/000-default.conf
-ADD keys.pub /tmp/your_key.pub
-ADD htaccess /var/www/html/.htaccess
-RUN cat /tmp/your_key.pub >> /root/.ssh/authorized_keys \
-    && rm -f /tmp/your_key.pub \
+    && chown -R www-data:www-data /var/www/html /opt/dokuwiki \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+ADD apache-site.conf /etc/apache2/sites-enabled/000-default.conf
+ADD htaccess /var/www/html/.htaccess
 VOLUME ["/opt/dokuwiki"]
 CMD ["/sbin/my_init"]
