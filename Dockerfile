@@ -5,7 +5,6 @@ ENV HOME /root
 
 RUN apt-get update \
     && apt-get install wget -y \
-    && apt-get clean \
     && a2enmod rewrite \
     && wget http://download.dokuwiki.org/src/dokuwiki/dokuwiki-stable.tgz \
     && tar xf dokuwiki-stable.tgz -C /var/www/html/ --strip-components=1 \
